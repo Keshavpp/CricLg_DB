@@ -1,5 +1,5 @@
 # CricLg_DB
-Database Management of a cricket league.
+Database Management System for a cricket league.
 
 ⎈ Description:
 
