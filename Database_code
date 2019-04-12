@@ -60,4 +60,27 @@ CREATE TABLE auctioned_to(
 	PRIMARY KEY(player_id)
 );
 
-//
+CREATE TABLE match(
+	match_id int PRIMARY KEY,
+   	home_team_id int REFERENCES team(team_id)
+   		ON DELETE SET NULL ON UPDATE CASCADE,
+    	guest_team_id int REFERENCES team(team_id)
+    		ON DELETE SET NULL ON UPDATE CASCADE,
+    	winner varchar(255),
+   	stadium_id int,
+   	category varchar(255),
+   	manOfTheMatch_id int,
+    	choice varchar(255),
+    	toss_winner int,
+    	h_wideballs int,
+    	h_noBalls int,
+   	h_byes int,
+   	h_legByes int,
+    	homeTeam_score int,
+    	guestTeam_score int,
+    	g_wideBalls int,
+    	g_noBalls int,
+    	g_byes int,
+   	g_legByes int
+);
+
