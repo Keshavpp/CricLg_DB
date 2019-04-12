@@ -4,12 +4,57 @@ CREATE SCHEMA CRICKET_LEAGUE;
 SET SEARCH_PATH TO CRICKET_LEAGUE;
 BEGIN;
 CREATE TABLE Players(
-id int PRIMARY KEY,
-dob DATE,
-first varchar(255),
-middle varchar(255),
-last varchar(255),
-basePrice decimal(10,2),
-country varchar(255),
-left_or_right_handed varchar(255)
+	id int PRIMARY KEY,
+	dob DATE,
+	first varchar(255),
+	middle varchar(255),
+	last varchar(255),
+	basePrice decimal(10,2),
+	country varchar(255),
+	left_or_right_handed varchar(255)
+);
+// Creating players_role relation
+CREATE TABLE Player_role(
+	role varchar(255),
+	player_id int REFERENCES Players(id) 
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	PRIMARY KEY (role,player_id)
+);
+
+create table stadium(
+	stadium_id int PRIMARY KEY,
+	city CHAR(15),
+ 	stadium_name CHAR(20)
+ );
+
+create table coach(
+	coach_id int PRIMARY KEY,
+ 	coach_name CHAR(20),
+	coach_country CHAR(20)
+);
+create table team(
+ 	team_id int PRIMARY KEY,
+ 	team_name CHAR(10),
+ 	captain_id int,
+ 	vice_captain_id int,
+	stadium_id int REFERENCES stadium(stadium_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+ 	coach_id int REFERENCES coach(coach_id)
+		ON DELETE SET NULL ON UPDATE CASCADE 
+);
+
+CREATE TABLE team_owner(
+	owner varchar(255),
+	team_id int REFERENCES team(team_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	PRIMARY KEY(owner,team_id)
+);
+
+CREATE TABLE auctioned_to(
+	player_id int REFERENCES Players(id)
+	ON DELETE SET NULL ON UPDATE CASCADE,
+	team_id int REFERENCES Team(team_id)
+	ON DELETE SET NULL ON UPDATE CASCADE,
+	final_price decimal(10,2),
+	PRIMARY KEY(player_id)
 );
