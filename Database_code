@@ -3,6 +3,7 @@ CREATE DATABASE CRICKET_LEAGUE;
 CREATE SCHEMA CRICKET_LEAGUE;
 SET SEARCH_PATH TO CRICKET_LEAGUE;
 BEGIN;
+//PLAYER TABLE
 CREATE TABLE Players(
 id int PRIMARY KEY,
 dob DATE,
@@ -13,3 +14,5 @@ basePrice decimal(10,2),
 country varchar(255),
 left_or_right_handed varchar(255)
 );
+
+//
