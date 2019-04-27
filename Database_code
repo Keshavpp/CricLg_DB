@@ -3,6 +3,7 @@ CREATE DATABASE CRICKET_LEAGUE;
 CREATE SCHEMA CRICKET_LEAGUE;
 SET SEARCH_PATH TO CRICKET_LEAGUE;
 BEGIN;
+//PLAYER TABLE
 CREATE TABLE Players(
 	id int PRIMARY KEY,
 	dob DATE,
@@ -59,6 +60,7 @@ CREATE TABLE auctioned_to(
 	PRIMARY KEY(player_id)
 );
 
+
 CREATE TABLE umpire(
 	umpire_id int PRIMARY KEY,
 	country varchar(255),
@@ -67,4 +69,55 @@ CREATE TABLE umpire(
 );
 
 
+CREATE TABLE match(
+	match_id int PRIMARY KEY,
+   	home_team_id int REFERENCES team(team_id)
+   		ON DELETE SET NULL ON UPDATE CASCADE,
+    	guest_team_id int REFERENCES team(team_id)
+    		ON DELETE SET NULL ON UPDATE CASCADE,
+    	winner varchar(255),
+   	stadium_id int,
+   	category varchar(255),
+   	manOfTheMatch_id int,
+    	choice varchar(255),
+    	toss_winner int,
+    	h_wideballs int,
+    	h_noBalls int,
+   	h_byes int,
+   	h_legByes int,
+    	homeTeam_score int,
+    	guestTeam_score int,
+    	g_wideBalls int,
+    	g_noBalls int,
+    	g_byes int,
+   	g_legByes int
+);
+
+CREATE TABLE umpired(
+	match_id int REFERENCES Match(match_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	umpire_id int REFERENCES Umpire(umpire_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	role varchar(255),
+	PRIMARY KEY(match_id,umpire_id)
+);
+
+
+CREATE TABLE scorecard_in(
+	player_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	match_id int REFERENCES Match(match_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	no_of_sixes int,
+	no_of_fours int,
+	runs_awarded int,
+	runs_scored int,
+	outType varchar(255),
+	over_bowled int,
+	wicketTaker_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	wickets_taken int,
+	ballsFaced int,
+	PRIMARY KEY(player_id,match_id)
+);
 
