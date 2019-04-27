@@ -58,3 +58,13 @@ CREATE TABLE auctioned_to(
 	final_price decimal(10,2),
 	PRIMARY KEY(player_id)
 );
+
+CREATE TABLE umpire(
+	umpire_id int PRIMARY KEY,
+	country varchar(255),
+	dob DATE,
+	umpire_name varchar(255)
+);
+
+
+
