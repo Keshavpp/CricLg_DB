@@ -60,6 +60,15 @@ CREATE TABLE auctioned_to(
 	PRIMARY KEY(player_id)
 );
 
+
+CREATE TABLE umpire(
+	umpire_id int PRIMARY KEY,
+	country varchar(255),
+	dob DATE,
+	umpire_name varchar(255)
+);
+
+
 CREATE TABLE match(
 	match_id int PRIMARY KEY,
    	home_team_id int REFERENCES team(team_id)
@@ -82,5 +91,33 @@ CREATE TABLE match(
     	g_noBalls int,
     	g_byes int,
    	g_legByes int
+);
+
+CREATE TABLE umpired(
+	match_id int REFERENCES Match(match_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	umpire_id int REFERENCES Umpire(umpire_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	role varchar(255),
+	PRIMARY KEY(match_id,umpire_id)
+);
+
+
+CREATE TABLE scorecard_in(
+	player_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	match_id int REFERENCES Match(match_id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	no_of_sixes int,
+	no_of_fours int,
+	runs_awarded int,
+	runs_scored int,
+	outType varchar(255),
+	over_bowled int,
+	wicketTaker_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	wickets_taken int,
+	ballsFaced int,
+	PRIMARY KEY(player_id,match_id)
 );
 
