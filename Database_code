@@ -9,8 +9,11 @@ CREATE TABLE Players(
 	dob DATE,
 	full_name varchar(255),
 	basePrice decimal(10,2),
-	country varchar(255),
-	left_or_right_handed varchar(255)
+	bowling_skill varchar(255),
+	batting_hand varchar(255),
+	role varchar(255),
+	institute varchar(255),
+	gender varchar(255)
 );
 
 create table stadium(
