@@ -27,13 +27,13 @@ create table coach(
 );
 create table team(
  	team_id int PRIMARY KEY,
- 	team_name CHAR(10),
- 	captain_id int,
- 	vice_captain_id int,
 	stadium_id int REFERENCES stadium(stadium_id)
 		ON DELETE SET NULL ON UPDATE CASCADE,
  	coach_id int REFERENCES coach(coach_id)
-		ON DELETE SET NULL ON UPDATE CASCADE 
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	captain_id int,
+ 	vice_captain_id int,
+	team_name CHAR(10)
 );
 
 CREATE TABLE team_owner(
@@ -45,9 +45,9 @@ CREATE TABLE team_owner(
 
 CREATE TABLE auctioned_to(
 	player_id int REFERENCES Players(id)
-	ON DELETE SET NULL ON UPDATE CASCADE,
+		ON DELETE SET NULL ON UPDATE CASCADE,
 	team_id int REFERENCES Team(team_id)
-	ON DELETE SET NULL ON UPDATE CASCADE,
+		ON DELETE SET NULL ON UPDATE CASCADE,
 	final_price decimal(10,2),
 	PRIMARY KEY(player_id)
 );
@@ -87,20 +87,20 @@ CREATE TABLE umpired(
 
 
 CREATE TABLE scorecard_in(
-	player_id int REFERENCES Players(id)
-		ON DELETE SET NULL ON UPDATE CASCADE,
 	match_id int REFERENCES Match(match_id)
 		ON DELETE SET NULL ON UPDATE CASCADE,
-	no_of_sixes int,
-	no_of_fours int,
-	runs_awarded int,
-	runs_scored int,
-	outType varchar(255),
-	over_bowled int,
-	wicketTaker_id int REFERENCES Players(id)
+	inning int,
+	over int,
+	ball_no. int,
+	striker_id int REFERENCES Players(id)
 		ON DELETE SET NULL ON UPDATE CASCADE,
-	wickets_taken int,
-	ballsFaced int,
-	PRIMARY KEY(player_id,match_id)
+	nonStriker_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	bowler_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+	runs int,
+	outType varchar(255),
+	extras_type varchar(255),
+	PRIMARY KEY(match_id,inning, over,ball_no.)
 );
 
