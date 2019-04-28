@@ -3,7 +3,7 @@ CREATE DATABASE CRICKET_LEAGUE;
 CREATE SCHEMA CRICKET_LEAGUE;
 SET SEARCH_PATH TO CRICKET_LEAGUE;
 BEGIN;
-//PLAYER TABLE
+--//PLAYER TABLE
 CREATE TABLE Players(
 	id int PRIMARY KEY,
 	dob DATE,
@@ -14,24 +14,16 @@ CREATE TABLE Players(
 	country varchar(255),
 	left_or_right_handed varchar(255)
 );
-// Creating players_role relation
-CREATE TABLE Player_role(
-	role varchar(255),
-	player_id int REFERENCES Players(id) 
-		ON DELETE SET NULL ON UPDATE CASCADE,
-	PRIMARY KEY (role,player_id)
-);
 
 create table stadium(
 	stadium_id int PRIMARY KEY,
-	city CHAR(15),
+	area CHAR(15),
  	stadium_name CHAR(20)
  );
 
 create table coach(
 	coach_id int PRIMARY KEY,
- 	coach_name CHAR(20),
-	coach_country CHAR(20)
+ 	coach_name CHAR(20)
 );
 create table team(
  	team_id int PRIMARY KEY,
@@ -63,7 +55,6 @@ CREATE TABLE auctioned_to(
 
 CREATE TABLE umpire(
 	umpire_id int PRIMARY KEY,
-	country varchar(255),
 	dob DATE,
 	umpire_name varchar(255)
 );
@@ -71,26 +62,18 @@ CREATE TABLE umpire(
 
 CREATE TABLE match(
 	match_id int PRIMARY KEY,
-   	home_team_id int REFERENCES team(team_id)
-   		ON DELETE SET NULL ON UPDATE CASCADE,
-    	guest_team_id int REFERENCES team(team_id)
-    		ON DELETE SET NULL ON UPDATE CASCADE,
-    	winner varchar(255),
-   	stadium_id int,
-   	category varchar(255),
-   	manOfTheMatch_id int,
-    	choice varchar(255),
-    	toss_winner int,
-    	h_wideballs int,
-    	h_noBalls int,
-   	h_byes int,
-   	h_legByes int,
-    	homeTeam_score int,
-    	guestTeam_score int,
-    	g_wideBalls int,
-    	g_noBalls int,
-    	g_byes int,
-   	g_legByes int
+ Â  	home_team_id int REFERENCES team(team_id)
+Â  Â 		ON DELETE SET NULL ON UPDATE CASCADE,
+Â  Â  	guest_team_id int REFERENCES team(team_id)
+Â  Â  		ON DELETE SET NULL ON UPDATE CASCADE,
+Â  Â  	winner varchar(255),
+Â  Â 	stadium_id int,
+Â Â  	category varchar(255),
+Â Â  	manOfTheMatch_id int,
+Â  Â  	choice varchar(255),
+Â  Â  	toss_winner int,
+Â  Â  	homeTeam_score int,
+Â  Â  	guestTeam_score int
 );
 
 CREATE TABLE umpired(
