@@ -96,7 +96,7 @@ CREATE TABLE scorecard_in(
 		ON DELETE SET NULL ON UPDATE CASCADE,
 	inning int,
 	over int,
-	ball_no. int,
+	ball_no int,
 	striker_id int REFERENCES Players(id)
 		ON DELETE SET NULL ON UPDATE CASCADE,
 	nonStriker_id int REFERENCES Players(id)
@@ -106,6 +106,6 @@ CREATE TABLE scorecard_in(
 	runs int,
 	outType varchar(255),
 	extras_type varchar(255),
-	PRIMARY KEY(match_id,inning, over,ball_no.)
+	PRIMARY KEY(match_id,inning, over,ball_no)
 );
 
