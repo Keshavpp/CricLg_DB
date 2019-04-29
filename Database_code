@@ -32,8 +32,10 @@ create table team(
 		ON DELETE SET NULL ON UPDATE CASCADE,
  	coach_id int REFERENCES coach(coach_id)
 		ON DELETE SET NULL ON UPDATE CASCADE,
-	captain_id int,
- 	vice_captain_id int,
+	captain_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
+ 	vice_captain_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
 	team_name CHAR(10)
 );
 
@@ -70,11 +72,13 @@ CREATE TABLE match(
     	winner varchar(255),
    	stadium_id int,
    	category varchar(255),
-   	manOfTheMatch_id int,
+   	manOfTheMatch_id int REFERENCES Players(id)
+		ON DELETE SET NULL ON UPDATE CASCADE,
     	choice varchar(255),
     	toss_winner int,
     	homeTeam_score int,
-    	guestTeam_score int
+    	guestTeam_score int,
+	scheduled_date DATE
 );
 
 CREATE TABLE umpired(
