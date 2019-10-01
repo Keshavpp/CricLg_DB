@@ -4,7 +4,7 @@ Database Management System for a cricket league.
 ⎈ Description:
 
 This database provides information about the cricketers, their
-respective teams, at what price they were sold, captain of the
+respective teams,their base price and at what price they were sold, captain of the
 team, umpires which are onfield for which matches, players
 which are left/right-handed batsman/bowler, whether they are
 allrounder or not and many more.
