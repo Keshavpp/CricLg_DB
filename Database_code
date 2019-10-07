@@ -24,7 +24,7 @@ create table stadium(
 
 create table coach(
 	coach_id int PRIMARY KEY,
- 	coach_name CHAR(20)
+ 	coach_name CHAR(40)
 );
 create table team(
  	team_id int PRIMARY KEY,
